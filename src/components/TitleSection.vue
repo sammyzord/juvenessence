@@ -1,21 +1,23 @@
 <template>
   <div>
     <div
-      class="flex flex-col h-screen justify-between items-center backdrop-blur backdrop bg-stone-600/40"
+      class="flex flex-col h-screen justify-between items-center backdrop-blur backdrop bg-stone-800/40"
     >
       <div></div>
       <div></div>
-      <div class="flex flex-col items-center space-y-16">
-        <div class="flex flex-col items-center">
-          <h1 class="intro w-64">THIS IS</h1>
-          <h1 class="intro">JUVENESSENCE</h1>
+      <div class="flex flex-col items-center gap-y-20 text-stone-200">
+        <div class="flex flex-col items-center gap-y-10">
+          <div class="flex flex-col items-center font-bold">
+            <h1 class="intro w-6/12 text-center">THIS IS</h1>
+            <h1 class="intro">JUVENESSENCE</h1>
+          </div>
+          <h2 class="text-3xl w-8/12 text-center">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
+            quis mollis urna, nec fringilla eros. Praesent porta ullamcorper
+            justo ac faucibus.
+          </h2>
         </div>
-        <h2 class="text-3xl w-8/12 text-center">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque quis
-          mollis urna, nec fringilla eros. Praesent porta ullamcorper justo ac
-          faucibus.
-        </h2>
-        <button class="border border-black border-2 p-4 rounded-full">
+        <button class="border border-stone-200 border-4 p-4 rounded-full">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -32,23 +34,29 @@
           </svg>
         </button>
       </div>
-      <div class="flex justify-between items-center w-10/12 bg-stone-500">
+      <div
+        class="flex justify-between items-center w-10/12 bg-stone-500 text-stone-200"
+      >
         <div class="flex">
-          <button class="w-48 py-5 font-semibold text-white text-lg">
-            JUVENESSENCE
-          </button>
-          <button class="w-48 py-5 font-semibold text-white text-lg">
+          <a
+            href="/about"
+            class="flex justify-center w-48 py-5 font-semibold text-lg"
+            >JUVENESSENCE
+          </a>
+          <a
+            href="/contact"
+            class="flex justify-center w-48 py-5 font-semibold text-lg"
+          >
             CONTACT
-          </button>
+          </a>
         </div>
         <div class="flex">
           <a href="">
             <svg
               role="img"
               viewBox="0 0 24 24"
-              stroke="currentColor"
               xmlns="http://www.w3.org/2000/svg"
-              class="w-6 h-6"
+              class="w-6 h-6 text-red-200"
             >
               <title>Instagram</title>
               <path
@@ -60,7 +68,6 @@
             <svg
               role="img"
               viewBox="0 0 24 24"
-              stroke="currentColor"
               xmlns="http://www.w3.org/2000/svg"
               class="w-6 h-6"
             >
