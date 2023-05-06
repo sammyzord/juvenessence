@@ -1,11 +1,31 @@
+<script setup lang="ts">
+import { defineProps, defineEmits } from "vue";
+import { opacityHelper } from "../utils/opacity";
+
+const emit = defineEmits(["about", "contact"]);
+
+const about = (): void => {
+  emit("about");
+};
+
+const contact = (): void => {
+  emit("contact");
+};
+
+const props = defineProps({
+  position: Number,
+});
+</script>
+
 <template>
-  <div>
-    <div
-      class="flex flex-col h-screen justify-between items-center backdrop-blur backdrop bg-stone-800/40"
-    >
+  <div class="w-screen h-screen">
+    <div class="flex flex-col h-full justify-between items-center w-full">
       <div></div>
       <div></div>
-      <div class="flex flex-col items-center gap-y-20 text-stone-200">
+      <div
+        class="flex flex-col items-center gap-y-20 text-stone-200 transition-opacity ease-in-out duration-700"
+        :class="`opacity-${opacityHelper(props.position || 0)}`"
+      >
         <div class="flex flex-col items-center gap-y-10">
           <div class="flex flex-col items-center font-bold">
             <h1 class="intro w-6/12 text-center">THIS IS</h1>
@@ -17,7 +37,10 @@
             justo ac faucibus.
           </h2>
         </div>
-        <button class="border border-stone-200 border-4 p-4 rounded-full">
+        <button
+          class="border border-stone-200 border-4 p-4 rounded-full animate-pulse"
+          @click="about"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -38,25 +61,27 @@
         class="flex justify-between items-center w-10/12 bg-stone-500 text-stone-200"
       >
         <div class="flex">
-          <a
-            href="/about"
+          <button
             class="flex justify-center w-48 py-5 font-semibold text-lg"
-            >JUVENESSENCE
-          </a>
-          <a
-            href="/contact"
+            @click="about"
+          >
+            JUVENESSENCE
+          </button>
+          <button
             class="flex justify-center w-48 py-5 font-semibold text-lg"
+            @click="contact"
           >
             CONTACT
-          </a>
+          </button>
         </div>
-        <div class="flex">
+        <div class="flex pr-6 gap-x-4">
           <a href="">
             <svg
               role="img"
               viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg"
-              class="w-6 h-6 text-red-200"
+              fill="#e7e5e4"
+              class="w-8 h-8 text-red-200"
             >
               <title>Instagram</title>
               <path
@@ -68,8 +93,9 @@
             <svg
               role="img"
               viewBox="0 0 24 24"
+              fill="#e7e5e4"
               xmlns="http://www.w3.org/2000/svg"
-              class="w-6 h-6"
+              class="w-8 h-8"
             >
               <title>Twitter</title>
               <path

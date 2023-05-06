@@ -5,4 +5,8 @@ export default {
     extend: {},
   },
   plugins: [],
+  safelist: [
+    { pattern: /(bg|backdrop)-opacity-.+/ },
+    { pattern: /opacity-.+/ },
+  ],
 };
