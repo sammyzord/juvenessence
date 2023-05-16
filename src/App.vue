@@ -3,7 +3,7 @@ import TitleSection from "./components/TitleSection.vue";
 import AboutSection from "./components/AboutSection.vue";
 import ContactSection from "./components/ContactSection.vue";
 import BlogSection from "./components/BlogSection.vue";
-import { ref, onMounted } from "vue";
+import { ref, onMounted, Ref } from "vue";
 import { opacityHelper } from "./utils/opacity";
 
 const scroll = (position = 0) => {
@@ -11,14 +11,18 @@ const scroll = (position = 0) => {
 };
 
 const about = () => {
-  scroll(screen.height -100);
+  selected.value = "about";
+  scroll(screen.height - 100);
 };
 
 const contact = () => {
+  selected.value = "contact";
   scroll(document.body.scrollHeight);
 };
 
 const position = ref(0);
+
+const selected: Ref<undefined | string> = ref(undefined);
 
 onMounted(() => {
   window.addEventListener("scroll", function () {
@@ -37,6 +41,7 @@ onMounted(() => {
         @about="about"
         @contact="contact"
         :position="position"
+        :selected="selected"
       ></TitleSection>
       <AboutSection :position="position"></AboutSection>
       <BlogSection></BlogSection>

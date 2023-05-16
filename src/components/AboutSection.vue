@@ -1,13 +1,15 @@
 <template>
   <div
-    class="flex flex-col items-center bg-stone-200 w-10/12 text-stone-900 pb-20 px-20 gap-y-20"
+    class="flex flex-col items-center bg-stone-200 w-full md:w-10/12 text-stone-900 pb-20 px-10 md:px-20 gap-y-20"
   >
     <div class="flex flex-col items-center w-full space-y-20 mt-20">
       <div class="w-full border-t-2 border-stone-400"></div>
-      <h1 class="about-title font-bold text-stone-700">ABOUT US</h1>
+      <h1 class="about-title font-bold text-stone-700 w-72 sm:w-96 text-center">
+        ABOUT US
+      </h1>
     </div>
-    <div class="flex items-center gap-x-20">
-      <div class="w-1/2">
+    <div class="flex flex-col lg:flex-row items-center gap-x-20 gap-y-10">
+      <div class="w-full lg:w-1/2">
         <img
           src="../assets/about-photo.jpg"
           alt=""
@@ -15,7 +17,7 @@
         />
       </div>
       <div
-        class="flex flex-col gap-y-8 font-serif italic text-xl leading-loose indent-8 w-1/2"
+        class="flex flex-col gap-y-8 font-serif italic md:text-xl leading-loose md:indent-8 w-full lg:w-1/2"
       >
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
@@ -45,5 +47,11 @@
 .about-title {
   font-size: 4rem;
   line-height: 1;
+}
+@media only screen and (max-width: 500px) {
+  .about-title {
+    font-size: 3rem;
+    line-height: 1;
+  }
 }
 </style>

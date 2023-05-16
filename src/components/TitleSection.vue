@@ -12,9 +12,11 @@ const contact = (): void => {
   emit("contact");
 };
 
-const props = defineProps({
-  position: Number,
-});
+interface Props {
+  position: number;
+  selected?: string;
+}
+const props = defineProps<Props>();
 </script>
 
 <template>
@@ -31,7 +33,7 @@ const props = defineProps({
             <h1 class="intro w-6/12 text-center">THIS IS</h1>
             <h1 class="intro">JUVENESSENCE</h1>
           </div>
-          <h2 class="text-3xl w-8/12 text-center">
+          <h2 class="text-2xl md:text-3xl w-8/12 text-center">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
             quis mollis urna, nec fringilla eros. Praesent porta ullamcorper
             justo ac faucibus.
@@ -47,7 +49,7 @@ const props = defineProps({
             viewBox="0 0 24 24"
             stroke-width="1.5"
             stroke="currentColor"
-            class="w-12 h-12"
+            class="w-8 h-8 md:w-12 md:h-12"
           >
             <path
               stroke-linecap="round"
@@ -58,17 +60,19 @@ const props = defineProps({
         </button>
       </div>
       <div
-        class="flex justify-between items-center w-10/12 bg-stone-500 text-stone-200"
+        class="flex justify-between items-center w-full md:w-10/12 bg-stone-500 text-stone-200"
       >
         <div class="flex">
           <button
-            class="flex justify-center w-48 py-5 font-semibold text-lg"
+            class="flex justify-center px-2 md:w-44 py-5 font-semibold md:text-lg"
+            :class="{ 'bg-stone-200 text-stone-500': selected === 'about' }"
             @click="about"
           >
             JUVENESSENCE
           </button>
           <button
-            class="flex justify-center w-48 py-5 font-semibold text-lg"
+            class="flex justify-center px-2 md:w-44 py-5 font-semibold md:text-lg"
+            :class="{ 'bg-stone-200 text-stone-500': selected === 'contact' }"
             @click="contact"
           >
             CONTACT
@@ -81,7 +85,7 @@ const props = defineProps({
               viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg"
               fill="#e7e5e4"
-              class="w-8 h-8 text-red-200"
+              class="h-5 w-5 md:w-8 md:h-8"
             >
               <title>Instagram</title>
               <path
@@ -95,7 +99,7 @@ const props = defineProps({
               viewBox="0 0 24 24"
               fill="#e7e5e4"
               xmlns="http://www.w3.org/2000/svg"
-              class="w-8 h-8"
+              class="h-5 w-5 md:w-8 md:h-8"
             >
               <title>Twitter</title>
               <path
@@ -113,5 +117,23 @@ const props = defineProps({
 .intro {
   font-size: 5rem;
   line-height: 1;
+}
+@media only screen and (max-width: 600px) {
+  .intro {
+    font-size: 4rem;
+    line-height: 1;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .intro {
+    font-size: 3rem;
+    line-height: 1;
+  }
+}
+@media only screen and (max-width: 380px) {
+  .intro {
+    font-size: 2rem;
+    line-height: 1;
+  }
 }
 </style>
