@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref, onMounted, Ref } from "vue";
 const postFiles: Record<
   string,
   Record<string, string | string[]>
@@ -6,10 +7,34 @@ const postFiles: Record<
   eager: true,
 });
 
+const loaded: Ref<boolean> = ref(false);
+const images: Ref<Record<string, any>> = ref({});
+
 const formatDate = (date: string): string => {
   const newDate = new Date(date);
   return newDate.toLocaleDateString();
 };
+
+const getPictures = async () => {
+  const keys = Object.keys(postFiles);
+
+  for (const key of keys) {
+    const path = key.replace("post.json", "picture");
+
+    const jpgImage = await import(`${path}.jpg`);
+    if (jpgImage.default.includes("/@fs")) {
+      const pngImage = await import(`${path}.png`);
+      images.value[key] = pngImage.default;
+    } else {
+      images.value[key] = jpgImage.default;
+    }
+  }
+};
+
+onMounted(async () => {
+  await getPictures();
+  loaded.value = true;
+});
 </script>
 
 <template>
@@ -23,7 +48,7 @@ const formatDate = (date: string): string => {
       </h2>
     </div>
     <div
-      v-for="[_key, post] in Object.entries(postFiles)"
+      v-for="[key, post] in Object.entries(postFiles)"
       class="flex flex-col gap-y-2 text-stone-500"
     >
       <h2 class="text-stone-700 text-3xl font-semibold">{{ post.title }}</h2>
@@ -32,9 +57,15 @@ const formatDate = (date: string): string => {
         {{ formatDate(post.date as string) }}
       </p>
       <div class="border-b-2 border-stone-500 w-1/2 mb-4"></div>
-      <p v-for="paragraph in post.paragraphs" class="mb-4">
-        {{ paragraph }}
-      </p>
+      <div class="">
+        <img
+          :src="images[key]"
+          class="w-11/12 sm:w-72 sm:h-96 object-cover sm:float-right mb-8 sm:mx-4 sm:mb-0"
+        />
+        <p v-for="paragraph in post.paragraphs" class="mb-4">
+          {{ paragraph }}
+        </p>
+      </div>
     </div>
   </div>
 </template>
