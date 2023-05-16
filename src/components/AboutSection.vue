@@ -54,4 +54,8 @@
     line-height: 1;
   }
 }
+::selection {
+  color: #44403c;
+  background-color: #a8a29e;
+}
 </style>
