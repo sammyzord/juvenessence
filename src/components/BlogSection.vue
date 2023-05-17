@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, Ref } from "vue";
+// import { ref, onMounted, Ref } from "vue";
 const postFiles: Record<
   string,
   Record<string, string | string[]>
@@ -7,34 +7,27 @@ const postFiles: Record<
   eager: true,
 });
 
-const loaded: Ref<boolean> = ref(false);
-const images: Ref<Record<string, any>> = ref({});
+const postPictures: Record<
+  string,
+  Record<string, string | string[]>
+> = import.meta.glob("../assets/posts/**/picture.*", {
+  eager: true,
+});
+
+console.log(postPictures);
 
 const formatDate = (date: string): string => {
   const newDate = new Date(date);
   return newDate.toLocaleDateString();
 };
 
-const getPictures = async () => {
-  const keys = Object.keys(postFiles);
-
-  for (const key of keys) {
-    const path = key.replace("post.json", "picture");
-
-    const jpgImage = await import(`${path}.jpg`);
-    if (jpgImage.default.includes("/@fs")) {
-      const pngImage = await import(`${path}.png`);
-      images.value[key] = pngImage.default;
-    } else {
-      images.value[key] = jpgImage.default;
-    }
-  }
+const findKey = (key: string): string => {
+  const number: string = key.split("/")[3];
+  const item = Object.entries(postPictures).find((item) =>
+    item[0].includes(number)
+  );
+  return item ? (item[1].default as string) : "";
 };
-
-onMounted(async () => {
-  await getPictures();
-  loaded.value = true;
-});
 </script>
 
 <template>
@@ -59,7 +52,7 @@ onMounted(async () => {
       <div class="border-b-2 border-stone-500 w-1/2 mb-4"></div>
       <div class="">
         <img
-          :src="images[key]"
+          :src="findKey(key)"
           class="w-11/12 sm:w-72 sm:h-96 object-cover sm:float-right mb-8 sm:mx-4 sm:mb-0"
         />
         <p v-for="paragraph in post.paragraphs" class="mb-4">
